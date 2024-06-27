@@ -63,7 +63,7 @@ window.onscroll = () => {
 
 //    prompt("Enter your Name");
    var firstName = prompt("Enter your Name");
-   var greeting = "Hello" + firstName;
+   var greeting = "WelCome" + firstName;
    alert(greeting);
 
 

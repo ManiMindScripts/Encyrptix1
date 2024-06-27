@@ -61,5 +61,11 @@ window.onscroll = () => {
             loop:true,
    });
 
+//    prompt("Enter your Name");
+   var firstName = prompt("Enter your Name");
+   var greeting = "Hello" + firstName;
+   alert(greeting);
+
+
 
 

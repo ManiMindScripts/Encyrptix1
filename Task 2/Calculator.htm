@@ -11,41 +11,92 @@
         <div class="calcuator">
             <form >
                 <div class="display">
-                    <input type="text" name="display">
+                    <input type="text" name="display" id="display" readonly>
                 </div>
                 <div>
-                    <input type="button" value="AC" onclick="display.value =''" class="operator">
-                    <input type="button" value="DE"  onclick="display.value = display.value.toString().slice(0,-1)" class="operator">
-                    <input type="button" value="." onclick="display.value +='.'" class="operator">
-                    <input type="button" value="/"  onclick="display.value +='/'" class="operator">
+                    <input type="button" value="AC"  class="operator" id="clear">
+                    <input type="button" value="DE" id="delete" >
+                    <input type="button" value="." id="dot" >
+                    <input type="button" value="/" id="devide" >
                 </div>
                 <div>
-                    <input type="button" value="7" onclick="display.value +='7'">
-                    <input type="button" value="8"  onclick="display.value +='8'">
-                    <input type="button" value="9"  onclick="display.value +='9'">
-                    <input type="button" value="*"  onclick="display.value +='*'" class="operator" >
+                    <input type="button" value="7" class="number" >
+                    <input type="button" value="8" class="number" >
+                    <input type="button" value="9"  class="number" >
+                    <input type="button" value="*"   class="operator" id="multiply" >
                 </div>
                 <div>
-                    <input type="button" value="4"  onclick="display.value +='4'">
-                    <input type="button" value="5"  onclick="display.value +='5'">
-                    <input type="button" value="6"  onclick="display.value +='6'">
-                    <input type="button" value="-"  onclick="display.value +='-'" class="operator">
+                    <input type="button" value="4" class="number" >
+                    <input type="button" value="5" class="number" >
+                    <input type="button" value="6" class="number" >
+                    <input type="button" value="-"   class="operator" id="subtract ">
                 </div>
                 <div>
-                    <input type="button" value="1"  onclick="display.value +='1'">
-                    <input type="button" value="2"  onclick="display.value +='2'">
-                    <input type="button" value="3"  onclick="display.value +='3'">
-                    <input type="button" value="+"  onclick="display.value +='+'" class="operator">
+                    <input type="button" value="1" class="number" >
+                    <input type="button" value="2" class="number" >
+                    <input type="button" value="3" class="number" >
+                    <input type="button" value="+"   class="operator" id="add">
                 </div>
                 <div>
-                    <input type="button" value="00" onclick="display.value +='00'" >
-                    <input type="button" value="0" onclick="display.value +='0'">
-                    <input type="button" value="=" onclick="display.value = eval(display.value)"  class="equal operator" >
+                    <input type="button" value="00"  class="number" >
+                    <input type="button" value="0" class="number" >
+                    <input type="button" value="="   class="equal operator" id="equal">
                     
                 </div>
             </form>
             
         </div>
     </div>
+    <script>
+        // JavaScript to handle calculator logic
+
+        // Select elements
+        const display = document.getElementById('display');
+        const buttons = document.querySelectorAll('input[type="button"]');
+
+        // Variables to store current input and result
+        let currentInput = '';
+        let result = '';
+
+        // Function to update the display
+        function updateDisplay(value) {
+            display.value = value;
+        }
+
+        // Function to handle button click
+        function handleButtonClick(event) {
+            const value = event.target.value;
+
+            if (value === 'AC') {
+                // Clear the display
+                currentInput = '';
+                result = '';
+                updateDisplay('');
+            } else if (value === 'DE') {
+                // Delete the last character
+                currentInput = currentInput.slice(0, -1);
+                updateDisplay(currentInput);
+            } else if (value === '=') {
+                // Evaluate the expression
+                try {
+                    result = eval(currentInput);
+                    updateDisplay(result);
+                    currentInput = result.toString();
+                } catch (error) {
+                    updateDisplay('Error');
+                    currentInput = '';
+                }
+            } else {
+                // Append clicked button value to the current input
+                currentInput += value;
+                updateDisplay(currentInput);
+            }
+        }
+
+        // Add event listeners to buttons
+        buttons.forEach(button => {
+            button.addEventListener('click', handleButtonClick);
+        });
+    </script>
 </body>
 </html>
